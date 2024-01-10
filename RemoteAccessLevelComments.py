@@ -1,7 +1,5 @@
 from requests import post
-import base64
-def base64_decode(string: str) -> str:
-    return base64.urlsafe_b64decode(string.encode()).decode()
+from base64 import b64decode
 head = {
     "Accept-Encoding": "",
     "User-Agent": "",
@@ -29,7 +27,7 @@ while True:
             comment_base64 = comment_parts[comment_parts.index('2') + 1]
             message_id = comment_parts[comment_parts.index('6') + 1].split(':')[0]
             try:
-                comment = base64.b64decode(comment_base64).decode('utf-8')
+                comment = b64decode(comment_base64).decode('utf-8')
             except Exception as e:
                 comment = "Unable to decode comment"
             print("Author Name:", author_name if author_name else "N/A")
